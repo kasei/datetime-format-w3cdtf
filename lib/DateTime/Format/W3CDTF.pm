@@ -7,6 +7,7 @@ use vars qw ($VERSION);
 $VERSION = '0.05';
 
 use DateTime;
+use DateTime::TimeZone;
 
 sub new {
     my $class = shift;
@@ -14,79 +15,59 @@ sub new {
     return bless {}, $class;
 }
 
-# key is string length
-my %valid_formats = (
-    19 => {
-        params => [qw( year month day hour minute second)],
-        regex  => qr/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)$/,
-        zero   => {},
-    },
-    16 => {
-        params => [qw( year month day hour minute)],
-        regex  => qr/^(\d{4})-(\d\d)-(\d\d)T(\d\d):(\d\d)$/,
-        zero   => { second => 0 },
-    },
-    10 => {
-        params => [qw( year month day )],
-        regex  => qr/^(\d{4})-(\d\d)-(\d\d)$/,
-        zero   => { hour => 0, minute => 0, second => 0 },
-    },
-    7 => {
-        params => [qw( year month )],
-        regex  => qr/^(\d{4})-(\d\d)$/,
-        zero   => { day => 1, hour => 0, minute => 0, second => 0 },
-    },
-    4 => {
-        params => [qw( year )],
-        regex  => qr/^(\d\d\d\d)$/,
-        zero => { month => 1, day => 1, hour => 0, minute => 0, second => 0 }
-    }
-);
-
 sub parse_datetime {
     my ( $self, $date ) = @_;
 
-    # save for error messages
-    my $original = $date;
-
+    my @fields = qw/ year month day hour minute second fraction time_zone /;
+    my @values = 
+       ( $date =~ /^(\d\d\d\d) # Year
+                    (?:-(\d\d) # -Month
+                     (?:-(\d\d) # -Day
+                      (?:T
+                       (\d\d):(\d\d) # Hour:Minute
+                       (?:
+                          :(\d\d)     # :Second
+                          (\.\d+)?    # .Fractional_Second
+                       )?
+                       ( Z          # UTC
+                       | [+-]\d\d:\d\d    # Hour:Minute TZ offset
+                         (?::\d\d)?       # :Second TZ offset
+                       )?)?)?)?$/x )
+         or die "Invalid W3CDTF datetime string ($date)";
     my %p;
-    if ( $date =~ s/([+-]\d\d:\d\d)$// ) {
-        $p{time_zone} = $1;
+    for ( my $i=0; $i < @values; $i++ ) {  # Oh how I wish Perl had zip
+       next unless defined $values[$i];
+       $p{$fields[$i]} = $values[$i];
     }
 
-    # Z at end means UTC
-    elsif ( $date =~ s/Z$// ) {
+    if ( !$p{time_zone} ) {
+        $p{time_zone} = 'floating';
+    } elsif ( $p{time_zone} eq 'Z' ) {
         $p{time_zone} = 'UTC';
     }
-    else {
-        $p{time_zone} = 'floating';
+
+    if ( $p{fraction} ) {
+        $p{nanosecond} = $p{fraction} * 1_000_000_000;
+        delete $p{fraction}
     }
 
-    my $format = $valid_formats{ length $date }
-        or die "Invalid W3CDTF datetime string ($original)";
-
-    @p{ @{ $format->{params} } } = $date =~ /$format->{regex}/;
-
-    return DateTime->new( %p, %{ $format->{zero} } );
+    return DateTime->new( %p );
 }
 
 sub format_datetime {
     my ( $self, $dt ) = @_;
-
-    # removed in 0.4 as it behaved improperly at midnight - kellan 2003/11/23
-    #my $base =
-    #    ( $dt->hour || $dt->min || $dt->sec ?
-    #      sprintf( '%04d-%02d-%02dT%02d:%02d:%02d',
-    #               $dt->year, $dt->month, $dt->day,
-    #               $dt->hour, $dt->minute, $dt->second ) :
-    #      sprintf( '%04d-%02d-%02d', $dt->year, $dt->month, $dt->day )
-    #    );
 
     my $base = sprintf(
         '%04d-%02d-%02dT%02d:%02d:%02d',
         $dt->year, $dt->month,  $dt->day,
         $dt->hour, $dt->minute, $dt->second
     );
+
+    if ( $dt->nanosecond ) {
+        my $secs = sprintf "%f", $dt->nanosecond / 1_000_000_000;
+        $secs =~ s/^0//;
+        $base .= $secs;
+    }
 
     my $tz = $dt->time_zone;
 
