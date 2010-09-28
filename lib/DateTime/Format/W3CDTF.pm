@@ -182,8 +182,8 @@ Dave Rolsky E<lt>autarch@urth.orgE<gt>
 
 =head1 CREDITS
 
-This module was originally created by Kellan Elliott-McCrea
-E<lt>kellan@protest.netE<gt>.
+This module is maintained by Gregory Todd Williams E<lt>gwilliams@cpan.orgE<gt>.
+It was originally created by Kellan Elliott-McCrea E<lt>kellan@protest.netE<gt>.
 
 This module was inspired by L<DateTime::Format::ICal>
 
