@@ -17,11 +17,10 @@ my $builder = Module::Build->new(
     create_makefile_pl => 'traditional',
     meta_merge         => {
         resources => {
-            homepage => 'http://datetime.perl.org/',
             bugtracker =>
                 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=DateTime-Format-W3CDTF',
             repository =>
-                'https://perl-date-time.svn.sourceforge.net/svnroot/perl-date-time',
+                'http://github.com/kasei/datetime-format-w3cdtf',
         },
     },
 );
