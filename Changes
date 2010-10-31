@@ -1,9 +1,12 @@
+0.06  2010-XX-XX
+
+- Fixed parsing of datetimes with sub-second precision (RT 14179, patch from Andrew Turner).
+
 0.05  2009-11-01
 
 - Fixed a long-standing bug where a time zone other than UTC that had an
   offset of 0 caused the format_datetime method to return the string "0". RT
   #22802.
-
 
 0.04  2003-11-23
 
