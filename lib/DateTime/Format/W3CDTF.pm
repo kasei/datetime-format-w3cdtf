@@ -1,6 +1,7 @@
 package DateTime::Format::W3CDTF;
 
 use strict;
+use warnings;
 
 use vars qw ($VERSION);
 
