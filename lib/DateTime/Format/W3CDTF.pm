@@ -4,7 +4,7 @@ use strict;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.05';
+$VERSION = '0.05_01';
 
 use DateTime;
 use DateTime::TimeZone;
