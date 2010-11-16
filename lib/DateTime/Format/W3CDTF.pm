@@ -40,7 +40,21 @@ sub parse_datetime {
        next unless defined $values[$i];
        $p{$fields[$i]} = $values[$i];
     }
-
+    
+### support for YYYY-MM-DDT24:00:00 as a syntactic form for 00:00:00 on the day following YYYY-MM-DD
+### this is allowed in xsd dateTime syntactic forms, but not W3CDTF.
+#     my $next_day    = 0;
+#     if (defined($p{hour}) and defined($p{minute}) and defined($p{second})) {
+#         if ($p{hour} eq '24') {
+#             if ($p{second} eq '00' and $p{minute} eq '00') {
+#                 $p{hour}    = '00';
+#                 $next_day++;
+#             } else {
+#                 die "Cannot use hour value '24' with non-zero minutes and seconds\n";
+#             }
+#         }
+#     }
+    
     if ( !$p{time_zone} ) {
         $p{time_zone} = 'floating';
     } elsif ( $p{time_zone} eq 'Z' ) {
@@ -52,7 +66,11 @@ sub parse_datetime {
         delete $p{fraction}
     }
 
-    return DateTime->new( %p );
+    my $dt = DateTime->new( %p );
+#     if ($next_day) {
+#         $dt->add( day => 1 );
+#     }
+    return $dt;
 }
 
 sub format_datetime {
@@ -80,7 +98,7 @@ sub format_datetime {
 
     return $base unless defined $offset;
 
-    return $base . offset_as_string($offset)
+    return $base . _offset_as_string($offset)
 }
 
 sub format_date {
@@ -92,7 +110,7 @@ sub format_date {
 
 # minor offset_as_string variant w/ :
 #
-sub offset_as_string {
+sub _offset_as_string {
     my $offset = shift;
 
     return undef unless defined $offset;
@@ -145,6 +163,10 @@ objects.
 This API is currently experimental and may change in the future.
 
 =over 4
+
+=item * new()
+
+Returns a new W3CDTF parser object.
 
 =item * parse_datetime($string)
 
