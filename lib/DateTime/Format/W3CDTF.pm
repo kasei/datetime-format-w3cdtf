@@ -5,7 +5,7 @@ use warnings;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.05_01';
+$VERSION = '0.06';
 
 use DateTime;
 use DateTime::TimeZone;
