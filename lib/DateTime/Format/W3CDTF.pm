@@ -5,7 +5,7 @@ use warnings;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 use DateTime;
 use DateTime::TimeZone;
@@ -90,13 +90,11 @@ sub format_datetime {
 
     my $tz = $dt->time_zone;
 
-    return $base if $tz->is_floating;
-
-    return $base . 'Z' if $tz->is_utc;
+    return $base . 'Z' if $tz->is_floating || $tz->is_utc;
 
     my $offset = $dt->offset();
 
-    return $base unless defined $offset;
+    return $base . 'Z' unless defined $offset;
 
     return $base . _offset_as_string($offset)
 }
@@ -152,7 +150,7 @@ DateTime::Format::W3CDTF - Parse and format W3CDTF datetime strings
 =head1 DESCRIPTION
 
 This module understands the W3CDTF date/time format, an ISO 8601 profile,
-defined at http://www.w3.org/TR/NOTE-datetime.  This format as the native
+defined at http://www.w3.org/TR/NOTE-datetime.  This format is the native
 date format of RSS 1.0.
 
 It can be used to parse these formats in order to create the appropriate 
@@ -180,9 +178,14 @@ If given an improperly formatted string, this method may die.
 Given a C<DateTime> object, this methods returns a W3CDTF datetime
 string.
 
-NOTE: As of version 0.4, format_datetime no longer attempts to truncate
+NOTE: As of version 0.04, format_datetime no longer attempts to truncate
 datetimes without a time component.  This is due to the fact that C<DateTime>
 doesn't distinguish between a date with no time component, and midnight.
+
+NOTE: As of version 0.07, format_datetime will always include a timezone
+in the returned string, since all W3CDTF formats with a time component
+require a timezone.  This means a "floating" C<DateTime> with no timezone
+will now default to "Z" timezone.
 
 =item * format_date($datetime)
 
