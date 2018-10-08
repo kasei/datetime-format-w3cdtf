@@ -20,7 +20,7 @@ sub parse_datetime {
     my ( $self, $date ) = @_;
 
     # Dummy self if called as class method.
-    $self = {} unless ref $self;
+    $self = $self->new() unless ref $self;
 
     my @fields = qw/ year month day hour minute second fraction time_zone /;
     my @values = 

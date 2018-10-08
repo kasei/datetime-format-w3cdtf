@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Test::More tests => 35;
+use Test::More;
 use strict;
 use vars qw( $class );
 
@@ -66,3 +66,4 @@ for (@noparse) {
         "Strict parsing failed: $_" );
 }
 
+done_testing();
