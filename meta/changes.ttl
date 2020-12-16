@@ -32,11 +32,11 @@ my:project
 							my:v_0-07 , my:v_0-08 ;
 	.
 
-my:v_0-008
+my:v_0-08
 	a					:Version ;
 	dc:issued			"2020-XX-XX"^^xsd:date ;
 	:revision			"0.008" ;
-	dcterms:replaces	my:v_0-007 ;
+	dcterms:replaces	my:v_0-07 ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Update ; rdfs:label "Add 'strict' option to require timezone in time components (PR #3 from @timgimyee)." ]
@@ -44,11 +44,11 @@ my:v_0-008
 	.
 
 
-my:v_0-007
+my:v_0-07
 	a					:Version ;
 	dc:issued			"2017-04-07"^^xsd:date ;
 	:revision			"0.007" ;
-	dcterms:replaces	my:v_0-006 ;
+	dcterms:replaces	my:v_0-06 ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Update ; rdfs:label "Added explicit \"use lib '.'\" for use with perl 5.26.0 (RT #120822, PR #1 from James E Keenan)." ]
@@ -56,11 +56,11 @@ my:v_0-007
 	.
 
 
-my:v_0-006
+my:v_0-06
 	a					:Version ;
 	dc:issued			"2011-02-06"^^xsd:date ;
 	:revision			"0.006" ;
-	dcterms:replaces	my:v_0-005 ;
+	dcterms:replaces	my:v_0-05 ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Update ; rdfs:label "Fixed parsing of datetimes with sub-second precision (RT #14179, patch from Andrew Turner)." ]
@@ -68,11 +68,11 @@ my:v_0-006
 	.
 
 
-my:v_0-005
+my:v_0-05
 	a					:Version ;
 	dc:issued			"2009-11-01"^^xsd:date ;
 	:revision			"0.005" ;
-	dcterms:replaces	my:v_0-004 ;
+	dcterms:replaces	my:v_0-04 ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Update ; rdfs:label "Fixed a bug where a TZ other than UTC that had an offset of 0 caused the format_datetime method to return the string '0' (RT #22802)." ]
@@ -80,11 +80,11 @@ my:v_0-005
 	.
 
 
-my:v_0-004
+my:v_0-04
 	a					:Version ;
 	dc:issued			"2003-11-23"^^xsd:date ;
 	:revision			"0.004" ;
-	dcterms:replaces	my:v_0-003 ;
+	dcterms:replaces	my:v_0-03 ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Update ; rdfs:label "Changed behaviour of format_datetime to always return a full timestamp." ],
@@ -93,7 +93,7 @@ my:v_0-004
 	.
 
 
-my:v_0-003
+my:v_0-03
 	a					:Version ;
 	dc:issued			"2003-02-25"^^xsd:date ;
 	:revision			"0.003" ;
