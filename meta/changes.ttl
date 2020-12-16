@@ -1,0 +1,104 @@
+# -*-n3-*-
+
+@prefix :			<http://usefulinc.com/ns/doap#> .
+@prefix dc:			<http://purl.org/dc/terms/> .
+@prefix dcs:		<http://ontologi.es/doap-changeset#> .
+@prefix foaf:		<http://xmlns.com/foaf/0.1/> .
+@prefix rdfs:		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:		<http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms:	<http://purl.org/dc/terms/> .
+@prefix doap:		<http://usefulinc.com/ns/doap#> .
+@prefix my:			<http://purl.org/NET/cpan-uri/dist/DateTime-Format-W3CDTF/> .
+
+<>
+	dc:title			"Chagnes for DateTime::Format::W3CDTF" ;
+	dc:subject			my:project ;
+	dc:creator			my:developer ;
+	dc:description		"Changes for DateTime::Format::W3CDTF" ;
+	.
+
+my:project
+	a 						:Project ;
+	:name					"DateTime::Format::W3CDTF" ;
+	:shortdesc				"Parse and format W3CDTF datetime strings" ;
+	:programming-language	"Perl" ;
+	:created				"2003-02-25"^^xsd:date ;
+	:maintainer				my:developer ;
+	:homepage				<https://metacpan.org/release/DateTime-Format-W3CDTF/> ;
+	:bug-database			<https://github.com/kasei/datetime-format-w3cdtf/issues> ;
+	doap:download-page		<https://metacpan.org/release/DateTime-Format-W3CDTF/> ;
+	doap:download-mirror	<http://kasei.us/code/files/> ;
+	:release				my:v_0-03 , my:v_0-04 , my:v_0-05 , my:v_0-06 ,
+							my:v_0-07 , my:v_0-08 ;
+	.
+
+my:v_0-008
+	a					:Version ;
+	dc:issued			"2020-XX-XX"^^xsd:date ;
+	:revision			"0.008" ;
+	dcterms:replaces	my:v_0-007 ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Update ; rdfs:label "Add 'strict' option to require timezone in time components (PR #3 from @timgimyee)." ]
+	]
+	.
+
+
+my:v_0-007
+	a					:Version ;
+	dc:issued			"2017-04-07"^^xsd:date ;
+	:revision			"0.007" ;
+	dcterms:replaces	my:v_0-006 ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Update ; rdfs:label "Added explicit \"use lib '.'\" for use with perl 5.26.0 (RT #120822, PR #1 from James E Keenan)." ]
+	]
+	.
+
+
+my:v_0-006
+	a					:Version ;
+	dc:issued			"2011-02-06"^^xsd:date ;
+	:revision			"0.006" ;
+	dcterms:replaces	my:v_0-005 ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Update ; rdfs:label "Fixed parsing of datetimes with sub-second precision (RT #14179, patch from Andrew Turner)." ]
+	]
+	.
+
+
+my:v_0-005
+	a					:Version ;
+	dc:issued			"2009-11-01"^^xsd:date ;
+	:revision			"0.005" ;
+	dcterms:replaces	my:v_0-004 ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Update ; rdfs:label "Fixed a bug where a TZ other than UTC that had an offset of 0 caused the format_datetime method to return the string '0' (RT #22802)." ]
+	]
+	.
+
+
+my:v_0-004
+	a					:Version ;
+	dc:issued			"2003-11-23"^^xsd:date ;
+	:revision			"0.004" ;
+	dcterms:replaces	my:v_0-003 ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Update ; rdfs:label "Changed behaviour of format_datetime to always return a full timestamp." ],
+			[ a dcs:Update ; rdfs:label "Fixed bug that caused formatter to fail when a named timezone had been set." ]
+	]
+	.
+
+
+my:v_0-003
+	a					:Version ;
+	dc:issued			"2003-02-25"^^xsd:date ;
+	:revision			"0.003" ;
+	dcs:changeset [
+		dcs:item
+			[ a dcs:Addition ; rdfs:label "Initial (working) release." ]
+	]
+	.
