@@ -34,12 +34,13 @@ my:project
 
 my:v_0-08
 	a					:Version ;
-	dc:issued			"2020-XX-XX"^^xsd:date ;
-	:revision			"0.008" ;
+	dc:issued			"2020-12-18"^^xsd:date ;
+	:revision			"0.08" ;
 	dcterms:replaces	my:v_0-07 ;
 	dcs:changeset [
 		dcs:item
-			[ a dcs:Update ; rdfs:label "Add 'strict' option to require timezone in time components (PR #3 from @timgimyee)." ]
+			[ a dcs:Update ; rdfs:label "Add 'strict' option to require timezone in time components (PR #3 from @timgimyee)." ],
+			[ a dcs:Update ; rdfs:label "Updated Makefile.PL with new metadata." ]
 	]
 	.
 
@@ -47,7 +48,7 @@ my:v_0-08
 my:v_0-07
 	a					:Version ;
 	dc:issued			"2017-04-07"^^xsd:date ;
-	:revision			"0.007" ;
+	:revision			"0.07" ;
 	dcterms:replaces	my:v_0-06 ;
 	dcs:changeset [
 		dcs:item
@@ -59,7 +60,7 @@ my:v_0-07
 my:v_0-06
 	a					:Version ;
 	dc:issued			"2011-02-06"^^xsd:date ;
-	:revision			"0.006" ;
+	:revision			"0.06" ;
 	dcterms:replaces	my:v_0-05 ;
 	dcs:changeset [
 		dcs:item
@@ -71,7 +72,7 @@ my:v_0-06
 my:v_0-05
 	a					:Version ;
 	dc:issued			"2009-11-01"^^xsd:date ;
-	:revision			"0.005" ;
+	:revision			"0.05" ;
 	dcterms:replaces	my:v_0-04 ;
 	dcs:changeset [
 		dcs:item
@@ -83,7 +84,7 @@ my:v_0-05
 my:v_0-04
 	a					:Version ;
 	dc:issued			"2003-11-23"^^xsd:date ;
-	:revision			"0.004" ;
+	:revision			"0.04" ;
 	dcterms:replaces	my:v_0-03 ;
 	dcs:changeset [
 		dcs:item
@@ -96,7 +97,7 @@ my:v_0-04
 my:v_0-03
 	a					:Version ;
 	dc:issued			"2003-02-25"^^xsd:date ;
-	:revision			"0.003" ;
+	:revision			"0.03" ;
 	dcs:changeset [
 		dcs:item
 			[ a dcs:Addition ; rdfs:label "Initial (working) release." ]

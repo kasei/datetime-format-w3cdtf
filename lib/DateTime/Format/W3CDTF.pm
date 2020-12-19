@@ -1,11 +1,41 @@
+=head1 NAME
+
+DateTime::Format::W3CDTF - Parse and format W3CDTF datetime strings
+
+=head1 VERSION
+
+This document describes DateTime::Format::W3CDTF version 0.08
+
+=head1 SYNOPSIS
+
+  use DateTime::Format::W3CDTF;
+
+  my $w3c = DateTime::Format::W3CDTF->new(strict => 1);
+  my $dt = $w3c->parse_datetime( '2003-02-15T13:50:05-05:00' );
+
+  # 2003-02-15T13:50:05-05:00
+  $w3c->format_datetime($dt);
+
+=head1 DESCRIPTION
+
+This module understands the W3CDTF date/time format, an ISO 8601 profile,
+defined at http://www.w3.org/TR/NOTE-datetime.  This format as the native
+date format of RSS 1.0.
+
+It can be used to parse these formats in order to create the appropriate 
+objects.
+
+=cut
+
 package DateTime::Format::W3CDTF;
 
+use v5.8;
 use strict;
 use warnings;
 
 use vars qw ($VERSION);
 
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 use DateTime;
 use DateTime::TimeZone;
@@ -145,29 +175,6 @@ sub _offset_as_string {
 1;
 
 __END__
-
-=head1 NAME
-
-DateTime::Format::W3CDTF - Parse and format W3CDTF datetime strings
-
-=head1 SYNOPSIS
-
-  use DateTime::Format::W3CDTF;
-
-  my $w3c = DateTime::Format::W3CDTF->new(strict => 1);
-  my $dt = $w3c->parse_datetime( '2003-02-15T13:50:05-05:00' );
-
-  # 2003-02-15T13:50:05-05:00
-  $w3c->format_datetime($dt);
-
-=head1 DESCRIPTION
-
-This module understands the W3CDTF date/time format, an ISO 8601 profile,
-defined at http://www.w3.org/TR/NOTE-datetime.  This format as the native
-date format of RSS 1.0.
-
-It can be used to parse these formats in order to create the appropriate 
-objects.
 
 =head1 METHODS
 
