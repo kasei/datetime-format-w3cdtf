@@ -39,6 +39,7 @@ $VERSION = '0.08';
 
 use DateTime;
 use DateTime::TimeZone;
+use POSIX qw(floor);
 
 sub new {
     my $class = shift;
@@ -98,7 +99,7 @@ sub parse_datetime {
     }
 
     if ( $p{fraction} ) {
-        $p{nanosecond} = $p{fraction} * 1_000_000_000;
+        $p{nanosecond} = floor($p{fraction} * 1_000_000_000);
         delete $p{fraction}
     }
 
